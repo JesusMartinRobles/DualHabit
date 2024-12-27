@@ -1,13 +1,17 @@
 class Habit {
-  final String id;
-  final String name;
-  final DateTime creationDate;
-  final bool isCompletedToday;
+  // Clase Habit
+  final String id; // ID del hábito
+  final String name; // Nombre del hábito
+  final String description; // Descripción del hábito
+  final DateTime creationDate; // Fecha de creación del hábito
+  final bool isCompletedToday; // Estado de completado del hábito
 
   Habit({
-    required this.id,
-    required this.name,
-    required this.creationDate,
-    this.isCompletedToday = false,
+    // Constructor de la clase Habit
+    required this.id, // ID del hábito
+    required this.name, // Nombre del hábito
+    required this.description, // Descripción del hábito
+    required this.creationDate, // Fecha de creación del hábito
+    this.isCompletedToday = false, // Estado de completado del hábito
   });
 }

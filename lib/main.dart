@@ -1,25 +1,32 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'presentation/pages/home_page.dart';
-import 'presentation/viewmodels/habit_viewmodel.dart';
+import 'package:flutter/material.dart'; // Importa el paquete material.dart
+import 'package:provider/provider.dart'; // Importa el paquete provider.dart
+import 'presentation/pages/home_page.dart'; // Importa la página de inicio
+import 'presentation/viewmodels/habit_viewmodel.dart'; // Importa el ViewModel de los hábitos
 
 void main() {
-  runApp(DualHabit());
+  // Punto de entrada de la aplicación
+  runApp(DualHabit()); // Ejecuta la aplicación
 }
 
 class DualHabit extends StatelessWidget {
-  const DualHabit({super.key});
+  // Clase DualHabit
+  const DualHabit({super.key}); // Constructor de la clase DualHabit
 
-  @override
+  @override // Anotación que sobrescribe el método build
   Widget build(BuildContext context) {
+    // Método build
     return ChangeNotifierProvider(
-      create: (context) => HabitViewModel(),
+      // Proveedor de cambio de notificador
+      create: (context) => HabitViewModel(), // Crea un ViewModel de hábitos
       child: MaterialApp(
-        title: 'DualHabit',
+        // Material de la aplicación
+        debugShowCheckedModeBanner: false, // Oculta la cinta de depuración
+        title: 'DualHabit', // Título de la aplicación
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          // Tema de la aplicación
+          primarySwatch: Colors.blue, // Color principal
         ),
-        home: HomePage(),
+        home: HomePage(), // Página de inicio
       ),
     );
   }
