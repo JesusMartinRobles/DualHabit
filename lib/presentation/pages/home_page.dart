@@ -37,15 +37,43 @@ class HomePage extends StatelessWidget {
                 return ListTile(
                   // Elemento de lista
                   title: Text(habit.name), // Título del hábito
-                  subtitle: Text(habit.description), // Subtítulo del hábito
-                  trailing: Checkbox(
-                    // Casilla de verificación
-                    value: habit.isCompletedToday, // Valor de la casilla
-                    onChanged: (value) {
-                      // Método al cambiar el valor
-                      habitViewModel.toggleHabitCompletion(habit
-                          .id); // Cambia el estado de completado del hábito
-                    },
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(habit.description), // Descripción del hábito
+                      if (habit.isCompletedToday)
+                        Text(
+                          'Completado el: ${habit.completionDates.map((date) {
+                            final day = date.day.toString().padLeft(2, '0');
+                            final month = date.month.toString().padLeft(2, '0');
+                            final year = date.year.toString();
+                            return '$day-$month-$year';
+                          }).join(', ')}',
+                        ),
+                    ],
+                  ),
+                  trailing: Row(
+                    // Fila de la derecha
+                    mainAxisSize: MainAxisSize.min, // Tamaño principal mínimo
+                    children: [
+                      // Lista de widgets
+                      IconButton(
+                        // Botón de icono
+                        icon: Icon(Icons.delete), // Icono de eliminar
+                        onPressed: () {
+                          // Función al pulsar el botón
+                          habitViewModel
+                              .removeHabit(habit.id); // Elimina el hábito
+                        },
+                      ), // Botón de icono
+                      Checkbox(
+                        value: habit.isCompletedToday, // Valor del checkbox
+                        onChanged: (value) {
+                          habitViewModel.toggleHabitCompletion(habit
+                              .id); // Cambia el estado de completado del hábito
+                        },
+                      ),
+                    ],
                   ),
                 );
               },
