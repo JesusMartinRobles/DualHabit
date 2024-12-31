@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart'; // Importa el paquete material.dart
 import 'package:uuid/uuid.dart'; // Importa el paquete uuid.dart
+import '../../data/database_helper.dart'; // Importa el archivo database_helper.dart
 import '../../domain/entities/habit.dart'; // Importa la entidad Habit
 
 class HabitViewModel extends ChangeNotifier {
   // Clase HabitViewModel
-  final List<Habit> _habits = []; // Lista de hábitos
+  List<Habit> _habits = []; // Lista de hábitos
+
+  final DatabaseHelper _databaseHelper =
+      DatabaseHelper(); // Helper de la base de datos
 
   List<Habit> get habits => _habits; // Getter de la lista de hábitos
+
+  HabitViewModel() {
+    // Constructor de la clase HabitViewModel
+    _loadHabits(); // Carga los hábitos
+  }
+
+  Future<void> _loadHabits() async {
+    _habits = await _databaseHelper.getHabits();
+    notifyListeners(); // Notifica a los oyentes
+  }
 
   void addHabit(String name, String description) {
     // Método para añadir un hábito
